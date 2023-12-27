@@ -1,6 +1,8 @@
 package models
 
-import "github.com/Monteiro712/db"
+import (
+	"github.com/Monteiro712/go-webstore/db"
+)
 
 type Produto struct {
 	ID         int  
@@ -9,8 +11,8 @@ type Produto struct {
 	Quantidade int64
 }
 
-func consultarProdutosDoBancoDeDados(db *sql.DB) []Produto {
-	db := db.
+func ConsultarProdutosDoBancoDeDados() []Produto {
+	db := db.ConectarBancoDeDados()
 	rows, err := db.Query("SELECT * FROM produtos")
 	if err != nil {
 		panic(err.Error())
@@ -27,6 +29,6 @@ func consultarProdutosDoBancoDeDados(db *sql.DB) []Produto {
 		}
 		produtos = append(produtos, produto)
 	}
-
+	defer db.Close()
 	return produtos
 }

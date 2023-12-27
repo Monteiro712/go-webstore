@@ -6,21 +6,21 @@ import(
 )
 
 
-func ConectarBancoDeDados() (*sql.DB, error) {
+func ConectarBancoDeDados() (*sql.DB) {
 	// Configuração da string de conexão
 	dataSourceName := "root:root@tcp(localhost:3306)/alura_loja"
 
 	// Abre a conexão com o banco de dados
 	db, err := sql.Open("mysql", dataSourceName)
 	if err != nil {
-		return nil, err
+		return nil
 	}
 
 	// Testa a conexão
 	err = db.Ping()
 	if err != nil {
-		return nil, err
+		return nil
 	}
 
-	return db, nil
+	return db
 }
