@@ -32,3 +32,16 @@ func ConsultarProdutosDoBancoDeDados() []Produto {
 	defer db.Close()
 	return produtos
 }
+
+func CriarNovoProduto(nome string, preco float64, quantidade int){
+	db.ConectarBancoDeDados()
+
+	insereDadosNoBanco, err := db.ConectarBancoDeDados().Prepare("INSERT INTO produtos(nome, preco, quantidade) VALUES(?, ?, ?)")
+
+
+	if err != nil{
+		panic(err.Error())
+	}
+	insereDadosNoBanco.Exec(nome, preco, quantidade)
+	defer db.ConectarBancoDeDados().Close()
+}
