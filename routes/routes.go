@@ -1,12 +1,20 @@
 package routes
 
-import(
-	"net/http"
-	"github.com/Monteiro712/go-webstore/controllers"
+import (
+    "net/http"
+    "github.com/gorilla/mux"
+    "github.com/Monteiro712/go-webstore/controllers"
 )
 
 func CarregaRotas() {
-	http.HandleFunc("/", controllers.Index)
-	http.HandleFunc("/new", controllers.New)
-	http.HandleFunc("/insert", controllers.Insert)
+    r := mux.NewRouter()
+
+    r.HandleFunc("/", controllers.Index)
+    r.HandleFunc("/new", controllers.New)
+    r.HandleFunc("/insert", controllers.Insert)
+    r.HandleFunc("/delete", controllers.Delete)
+    r.HandleFunc("/edit", controllers.Edit)
+    r.HandleFunc("/update", controllers.Update).Methods("PUT")
+
+    http.Handle("/", r)
 }

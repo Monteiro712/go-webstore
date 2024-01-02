@@ -34,6 +34,21 @@
                             <td>{{.Nome}}</td>
                             <td>{{.Preco}}</td>
                             <td>{{.Quantidade}}</td>
+                            <td>
+                                <form action="/edit" method="post">
+                                    <input type="hidden" name="id" value="{{.Id}}">
+                                    <button type="submit" class="btn btn-primary mb-2">Editar</button>
+                                </form>
+                                
+                                
+                            </td>
+                            <td>
+                                <form action="/delete" method="post">
+                                    <input type="hidden" name="id" value="{{.Id}}">
+                                    <button type="submit" class="btn btn-danger">Deletar</button>
+                                </form>
+                            </td>
+                            
                         </tr>
                         {{end}}
                     </tbody>
